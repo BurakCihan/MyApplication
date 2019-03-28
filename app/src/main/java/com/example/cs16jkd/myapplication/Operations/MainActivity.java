@@ -11,9 +11,16 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.cs16jkd.myapplication.R;
 import com.example.cs16jkd.myapplication.Tutorial.Tutorial;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -23,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private Uri pickedTimteTableURI;
     private static final int REQUEST_GALLERY = 001;
     private SweetAlertDialog CaptureDialog;
+    private GoogleHandler googleHandler = new GoogleHandler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +42,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         initUIElements();
+        //Init google
+        googleHandler.GoogleHandler(this);
         //Request permission
         PermissionsHandler permissionHandler = new PermissionsHandler();
-        permissionHandler.GalleryPermissionsHandling(this,MainActivity.this);
+        permissionHandler.PermissionsHandling(this,MainActivity.this);
+
     }
+
+
 
     /**
      * Initialise the UI Elements
@@ -58,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Choose between select from gallery or take picture
                 CaptureDialog = new SweetAlertDialog(MainActivity.this,SweetAlertDialog.NORMAL_TYPE);
-
                 CaptureDialog.setContentText("Recieve photo ?");
                 CaptureDialog.setConfirmText("Pick image from gallery");
                 CaptureDialog.setCancelText("Capture image from camera");
@@ -104,6 +117,17 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == REQUEST_GALLERY && resultCode == RESULT_OK){
           //Send the captured image to the next activity for completion
             SendToBitMapManager(data);
+        } if(requestCode == googleHandler.REQUEST_GOOGLE_SIGN_IN ){
+            //Toast.makeText(this, "Google sign in intent", Toast.LENGTH_SHORT).show();
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+
+                    GoogleSignInAccount signed_in_user = task.getResult(ApiException.class);
+                    Toast.makeText(this, "Welcome "+signed_in_user.getEmail(), Toast.LENGTH_SHORT).show();
+
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
         }
     }
 

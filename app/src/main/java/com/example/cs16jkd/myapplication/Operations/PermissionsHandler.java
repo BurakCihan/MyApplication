@@ -11,8 +11,9 @@ import android.support.v4.app.ActivityCompat;
  */
 
 public class PermissionsHandler {
-    public static final int PERMISSIONS_REQUEST = 001;
-    public static final int CAMERA_REQUEST = 002;
+    private static final int PERMISSIONS_REQUEST = 001;
+    private static final int CAMERA_REQUEST = 002;
+    private static final int CALENDAR_REQUEST = 003;
 
 
     /**
@@ -20,12 +21,21 @@ public class PermissionsHandler {
      * If the permission is not granted then request it
      * @param baseActivity
      */
-    public void GalleryPermissionsHandling(Context ctx,Activity baseActivity) {
+    public void PermissionsHandling(Context ctx,Activity baseActivity) {
         if(ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             RequestGalleryPermission(baseActivity);
         }else if(ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
             RequestCameraPermission(baseActivity);
+        } else if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_CALENDAR )== PackageManager.PERMISSION_DENIED) {
+            RequestCalendarPermission(baseActivity);
+        }else if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_CALENDAR )== PackageManager.PERMISSION_DENIED) {
+            RequestWriteCalendarPermission(baseActivity);
         }
+
+    }
+
+    private void RequestWriteCalendarPermission(Activity baseActivity) {
+        ActivityCompat.requestPermissions(baseActivity, new String[]{Manifest.permission.WRITE_CALENDAR}, CALENDAR_REQUEST);
 
     }
 
@@ -43,6 +53,14 @@ public class PermissionsHandler {
      */
     private void RequestCameraPermission(Activity baseActivity) {
         ActivityCompat.requestPermissions(baseActivity, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
+
+    }
+    /**
+     * Requests the permission
+     * @param baseActivity
+     */
+    private void RequestCalendarPermission(Activity baseActivity) {
+        ActivityCompat.requestPermissions(baseActivity, new String[]{Manifest.permission.READ_CALENDAR}, CALENDAR_REQUEST);
 
     }
 }

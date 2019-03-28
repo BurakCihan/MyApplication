@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.cs16jkd.myapplication">
 
+    <meta-data android:name="com.google.android.calendar.v3.API_KEY" android:value="AIzaSyB4a9VUydlm8Pq2sSNGKv9hlKSrO0a3PP8" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_CALENDAR"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+
 
     <application
         android:allowBackup="true"

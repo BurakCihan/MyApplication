@@ -5,32 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="com.example.cs16jkd.myapplication.Operations.ImportToCalendar">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:textSize="30dp"
-        android:padding="10dp"
-        android:textColor="@android:color/black"
         android:layout_height="wrap_content"
-        android:text="Import To Google Calendar" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Import To Google Calendar"
+        android:textColor="@android:color/black"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="Here is what was gathered from the timetable feel free to make the changes where you see fit." />
 
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Subject Activity Details" />
+
     <EditText
-        android:id="@+id/captured_ocr_text"
+        android:id="@+id/module_code_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Module Code"
         android:inputType="textMultiLine" />
 
+    <EditText
+        android:id="@+id/start_time_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Start Time"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/end_time_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="End Time"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Location In Brunel" />
+
+    <Spinner
+        android:id="@+id/location_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lecturer" />
+
+    <Spinner
+        android:id="@+id/lecturer_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
+        android:id="@+id/create_subject_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Create Events" />
